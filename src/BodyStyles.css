@@ -1,0 +1,21 @@
+.bodySettings{
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+  }
+  .animationRain{
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    background-size: cover;
+    background-image: url('/backgrounds/rain.svg');
+  }
+  .animationSnow{
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    background-size: cover;
+    background-image: url('/backgrounds/snow.svg');
+  }
+  

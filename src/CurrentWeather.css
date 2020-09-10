@@ -1,0 +1,97 @@
+.currentWeather{
+    padding: 40px;
+    color: white;
+    letter-spacing: .8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.currentWeather > h2 {
+    padding-right: 15%;
+}
+.currentWeather > .part > .location__info {
+    font-size: 19px;
+}
+.currentWeather > .part > .location__info > div:nth-child(2){
+    margin-top: 5px;
+    text-transform: capitalize;
+}
+.currentWeather > .part > .weather__info {
+    display: flex;
+    align-items: center;
+}
+.temp {
+    font-size: 50px;
+}
+.temp > div {
+    font-size: 14px;
+    opacity: .5;
+}
+.weather{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+}
+.weather > img {
+    width: 250px;
+}
+.few__info {
+    margin-right: 10%;
+}
+.few__info > span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform .3s;
+    font-size: 18px;
+}
+.few__info > span:hover{
+    transform: scale(.9);
+}
+.few__info > span > .MuiSvgIcon-root{
+    margin-left: 5px;
+    font-size: 15px;
+    animation: anim 7s infinite;
+    filter: drop-shadow(1px 1px 5px white);
+}
+@keyframes anim {
+    0%{
+        transform: rotate(90deg);
+        opacity: .3;
+    }
+    50% {        
+        opacity: 1;
+        transform: rotate(450deg);
+    }
+    100% {
+        opacity: .3;
+        transform: rotate(90deg);
+    }
+}
+.few__info > div {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 5px 0;
+    opacity: .7;
+}
+@media screen and (max-width: 768px) {
+    .currentWeather{
+        flex-direction: column;
+        padding: 20px;
+    }
+    .currentWeather > .part > .location__info {
+        font-size: 15px;
+    }
+    .weather > img {
+        width: 200px;
+        overflow: hidden;
+    }
+    .weather{
+        font-size: 25px;
+    }
+    .few__info{
+        display: none;
+    }
+}

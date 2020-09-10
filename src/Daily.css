@@ -1,0 +1,67 @@
+.daily{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+.daily > .day {
+    padding: 5px 10px;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.day > .date{
+    text-align: center;
+    text-transform: capitalize;
+}
+.day > .icon > img{
+    width: 100px;
+}
+.day > .part > .temp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.day > .part > .temp > div:nth-child(1) {
+    font-size: 30px;
+    color: white;
+    opacity: 1;
+}
+.day > .part > .temp > div:nth-child(2) {
+    font-size: 18px;
+    margin-left: 8px;
+    opacity: .7;
+}
+@media screen and (max-width: 768px) {
+    .daily{
+        align-items: center;
+        flex-direction: column;
+    }
+    .daily > .day {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+    }
+    .day > .part {
+        display: flex;
+        width: 60%;
+        justify-content: space-between;
+    }
+    .day > .part > .temp > div:nth-child(1){
+        font-size: 22px;
+    }
+    .day > .part > .temp > div:nth-child(2){
+        font-size: 15px;
+    }
+    .day > .desc{
+        display: none;
+    }
+    .day > .part > .icon > img{
+        width: 60px;
+      
+    }
+}

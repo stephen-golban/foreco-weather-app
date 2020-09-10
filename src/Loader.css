@@ -1,0 +1,12 @@
+/*loader styling starts*/
+.loader__body{
+    position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: #17315A;
+  }
+/*loader styling ends*/

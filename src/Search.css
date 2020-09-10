@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400&display=swap');
+
+.search__case{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    position: relative;
+}
+#free-solo-2-demo{
+    padding-left: 10px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    width: 450px;
+}
+.search__case > h1 {
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+    color: whitesmoke;
+}
+@media screen and (max-width: 768px) {
+    .search__case{
+        flex-direction: column;
+        padding: 40px 0 20px 0;
+        position: unset;
+        width: 95%;
+        align-items: center;
+    }
+    #free-solo-2-demo{
+        width: 280px;
+        padding-left: 10px;
+    }
+    .search__case > h1 {
+        left: 5px;
+        top: 5px;
+        font-size: 25px;
+    }
+}
