@@ -1,12 +1,17 @@
 /*loader styling starts*/
 .loader__body{
-    position: fixed;
+    position: absolute;
     width: 100%;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    min-height: 100%;
+    z-index: 5;
     background-color: #17315A;
+  }
+  .loader__body > img{
+    width: 100px;
+    display: flex;
+    align-items: center;
   }
 /*loader styling ends*/

@@ -6,6 +6,8 @@ export const initialState = {
     translatedWCode: "",
     weatherData: [],
     forecastDaily: [],
+    forecastHourly: [],
+    hourlyArray: [],
 };
 const reducer = (state, action) => {
     switch(action.type) {
@@ -14,10 +16,20 @@ const reducer = (state, action) => {
                 ...state,
                 weatherData: action.item
             };
+        case 'SET_HOURLY_ARRAY' :
+            return {
+                ...state,
+                hourlyArray: action.item
+            }
         case 'SET_FORECAST_DAILY' :
             return { 
                 ...state,
                 forecastDaily: action.item
+            };
+        case 'SET_FORECAST_HOURLY' :
+            return { 
+                ...state,
+                forecastHourly: action.item
             };
         case 'SET_ICON' :
             return { 

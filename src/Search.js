@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import requests from './requests';
 import './BodyStyles.css';
-import './Loader.css';
 import './Search.css';
 import axios from './axios';
 import { useStateValue } from './StateProvider';
@@ -10,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 
 
 function Search() {
-   const [time, setTime] = useState("");
    const [{}, dispatch] = useStateValue();
    const [location, setLocation] = useState("");
    const [foreDaily, setForeDaily] = useState([]);
@@ -21,10 +19,7 @@ function Search() {
    const [autoLocations, setAutoLocations] = useState([]);
 
    useEffect(() => {
-        dispatch({
-            type:"SET_USER_TIME",
-            item: time,
-        })
+        
         dispatch({
             type:"SET_LOCATION",
             item: location,
@@ -37,19 +32,20 @@ function Search() {
             type:"SET_DATA",
             item: wData
         })
+        
         dispatch({
             type:"SET_FORECAST_DAILY",
             item: foreDaily
         })
-   },[time, dispatch, location, localTime, wData, foreDaily])
+   },[ dispatch, location, localTime, wData, foreDaily])
     
     useEffect(() => {
         if(searchLocation !== ""){
             const searchWeather = async () => {
-                document.querySelector(".loader__body").style.display = "flex";
+                    document.querySelector(".loader__body").style.display = "flex";
                 setTimeout(() => {
-                document.querySelector(".loader__body").style.display = "none";
-                }, 1000);
+                    document.querySelector(".loader__body").style.display = "none";
+                }, 2000);
         
                 // gets inserted location details {lat and long} so I can use it to get Climacell data for specified coordinates
                 
@@ -69,13 +65,18 @@ function Search() {
                         fetch(`${requests.fetchTimezone}&lat=${lat}&long=${long}`)
                         .then(res=> res.json())
                         .then(data => {
-                            setTime(new Date(data.date_time).toLocaleString('ro-RO', {hour:"numeric"}))
+                            dispatch({
+                                type:"SET_USER_TIME",
+                                item: new Date(data.date_time).toLocaleString('ro-RO', {hour:"numeric"}),
+                            })
+                            
                             setLocalTime(new Date(data.date_time).toLocaleString('ro-RO', {weekday: "long", month:"long", day: "numeric", year: "numeric",hour: "numeric", minute: "numeric"}))
                         });
                         
                         // gets searchedLocation weather conditions and forecast
                         const request1 = await axios.get(`${requests.fetchRealTime}&lat=${lat}&lon=${long}`);
                         const request2 = await axios.get(`${requests.fetchForecastDaily}&lat=${lat}&lon=${long}`);
+                        const request3 = await axios.get(`${requests.fetchForecastHourly}&lat=${lat}&lon=${long}`);
                         
                         const WeatherRes = {
                             temp: request1.data.temp.value,
@@ -93,10 +94,15 @@ function Search() {
                         }
                         setWData(WeatherRes);
                         setForeDaily(request2.data.slice(0,5));
+                        dispatch({
+                            type:"SET_HOURLY_ARRAY",
+                            item: request3.data
+                        });
                         
                         return {
                             request1,
-                            request2
+                            request2,
+                            request3
                         }
                     }
                     fetchData();
@@ -106,7 +112,7 @@ function Search() {
                 searchWeather();
             }
         }
-    },[searchLocation])
+    },[searchLocation, dispatch])
                   
     useEffect(() => {
         if(query !== "") {

@@ -9,35 +9,49 @@ import Loader from './Loader';
 
 function CurrentWeather() {
     const [time, setTime] = useState("");
-    const [{ userLocation, userTimestamp, icon, weatherData, translatedWCode, forecastDaily }, dispatch] = useStateValue();
+    const [{ userLocation, userTimestamp, icon, weatherData, translatedWCode, hourlyArray }, dispatch] = useStateValue();
     const [location, setLocation] = useState("");
     const [localTime, setLocalTime] = useState("");
     const [wData, setWData] = useState([]);
     const [foreDaily, setForeDaily] = useState([]);
+    const [hourlyDate, setHourlyDate] = useState(new Date().toLocaleString("ro-RO", {weekday: "long", day: "numeric"}));
 
     useEffect(() => {
-        dispatch({
-            type:"SET_USER_TIME",
-            item: time,
-        })
-        dispatch({
-            type:"SET_LOCATION",
-            item: location,
-        })
-        dispatch({
-            type:"SET_USER_TIMESTAMP",
-            item: localTime
-        })
-        dispatch({
-            type:"SET_DATA",
-            item: wData
-        })
-        dispatch({
-            type:"SET_FORECAST_DAILY",
-            item: foreDaily
-        })
+        
+            dispatch({
+                type:"SET_USER_TIME",
+                item: time,
+            })
+            dispatch({
+                type:"SET_LOCATION",
+                item: location,
+            })
+            dispatch({
+                type:"SET_USER_TIMESTAMP",
+                item: localTime
+            })
+            dispatch({
+                type:"SET_DATA",
+                item: wData
+            })
+            dispatch({
+                type:"SET_FORECAST_DAILY",
+                item: foreDaily
+            })
+            
+        
     },[time, dispatch, location, localTime, wData, foreDaily])
 
+    useEffect(() => {
+     
+             dispatch({
+                type:"SET_FORECAST_HOURLY",
+                item: hourlyArray.filter((hour) => {
+                    return new Date(hour.observation_time.value).toLocaleString("ro-RO", {weekday: "long", day: "numeric"}).includes(hourlyDate);
+                })
+            })
+         
+    },[hourlyArray, hourlyDate, dispatch])
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
             let long = position.coords.longitude;
@@ -46,6 +60,8 @@ function CurrentWeather() {
             async function fetchData() {
                 const request1 = await axios.get(`${requests.fetchRealTime}&lat=${lat}&lon=${long}`);
                 const request2 = await axios.get(`${requests.fetchForecastDaily}&lat=${lat}&lon=${long}`);
+                const request3 = await axios.get(`${requests.fetchForecastHourly}&lat=${lat}&lon=${long}`);
+    
                 
                 const WeatherRes = {
                     temp: request1.data.temp.value,
@@ -61,16 +77,22 @@ function CurrentWeather() {
                     moon: request1.data.moon_phase.value,
                     weatherCode: request1.data.weather_code.value,
                 }
-                if(request1 && request2 !== null) {
+                if(request1 !== null && request2 !== null && request3 !== null) {
                     setWData(WeatherRes);
                     setForeDaily(request2.data.slice(0,5));
+                    dispatch({
+                        type:"SET_HOURLY_ARRAY",
+                        item: request3.data
+                    })
                 }
+
     
                 setTime(new Date().toLocaleString("ro-RO", {hour: "numeric"}));
                 setLocalTime(new Date().toLocaleString("ro-RO", {weekday: "long", month:"long", day: "numeric", year: "numeric",hour: "numeric", minute: "numeric"}));
                 return {
                     request1,
-                    request2
+                    request2,
+                    request3
                 };
             }
             async function fetchCoords() {
@@ -87,7 +109,7 @@ function CurrentWeather() {
             fetchCoords();
             fetchData();
         })
-    }, []);
+    }, [dispatch]);
     const handleScrollToWeatherInfo = () => {
         let selectedDiv = document.querySelector(".other__info");
         selectedDiv.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
@@ -134,7 +156,7 @@ function CurrentWeather() {
                     <span onClick={handleScrollToWeatherInfo}>Vezi mai mult {<ArrowForwardIosIcon/>}</span>
                 </div>
             </div>
-            <Daily />
+            <Daily setHourlyDate={setHourlyDate}/>
             <div className="other__info">
               
             </div>

@@ -1,4 +1,4 @@
-const CLIMA_KEY = "Xg4WHaT2g6oRgDZj8Tx1hM20P1FeCxqu";
+const CLIMA_KEY = "BzToU6ZzXbsmHpnF3gEPAWE1Kxfl41eP";
 const Time_KEY = "4529396d10b141e2964dd551f2835d1b";
 const Location_KEY = "f041d2e8af5efe";
 

@@ -10,7 +10,7 @@ function App() {
   const [{ weatherData, userTime }, dispatch] = useStateValue();
   const [wIcon, setWIcon] = useState("");
   const [romanianW, setRomanianW] = useState("");
-
+  
   // changing the body background in dependece of the weather_code (weather)
   useEffect(() => {
     let type = userTime >= "06" && userTime <= "19" ? "day" : "night"
@@ -64,7 +64,10 @@ useEffect(() => {
     type: "SET_ICON",
     item: wIcon
   })
-  
+  userTime >= "18" && userTime <= "20" && weatherData.weatherCode === "clear" ?
+      setWIcon(`assets/cloudy-day-2.svg`) :
+  userTime >= "18" && userTime <= "20" && weatherData.weatherCode === "mostly_clear" ?
+      setWIcon(`assets/cloudy-day-2.svg`) :
   weatherData.weatherCode === "clear" || weatherData.weatherCode === "mostly_clear" ?
       setWIcon(`assets/${type}.svg`) :
   weatherData.weatherCode === "partly_cloudy" ?
@@ -142,8 +145,7 @@ useEffect(() => {
 
   return (
     <div className="app">
-      {!weatherData && <Loader/>}
-      {!weatherData ? <Loader/> : <Header />}
+      {userTime === "" ? <Loader/> : <Loader/> && <Header/>}
       <CurrentWeather/>
     </div>
   );
