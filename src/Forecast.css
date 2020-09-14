@@ -20,10 +20,6 @@
     align-items: center;
     position: relative;
 }
-.daily > .day:nth-child(1) {
-    background-color: #fff;
-    color: black;
-}
 .daily > .day:hover{
     background-color: #fff;
     color: black;
@@ -122,12 +118,37 @@
     cursor: pointer;
     color: white;
 }
-.skip__active{
-    color: dodgerblue;
-}
-.skip__buttons > .MuiSvgIcon-root:active{
-    color: dodgerblue;
-}
+.fade {
+    animation: fade ease 1s;
+    -webkit-animation: fade ease 1s;
+    -moz-animation: fade ease 1s;
+    -o-animation: fade ease 1s;
+    -ms-animation: fade ease 1s;
+    }
+    @keyframes fade {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-moz-keyframes fade {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-webkit-keyframes fade {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-o-keyframes fade {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-ms-keyframes fade {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
 @media screen and (max-width: 768px) {
     .forecast__container{
         position: relative;

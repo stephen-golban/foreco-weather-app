@@ -1,0 +1,111 @@
+.current__infoContainer{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.current__info{
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: white;
+}
+.day__details__container{
+    display: flex;
+    justify-content: space-between;
+}
+.item__info{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(207, 207, 207);
+    padding: 10px 0;
+    margin-top: 10px;
+}
+.item__info > .part{
+    display: flex;
+    flex-direction: column;
+}
+.last__part {
+    width: 100px;
+}
+.item__info > .part__row > .part > p {
+    font-size: 18px;
+    opacity: .7;
+    margin-right: 15px;
+}
+
+.item__info > .part > p {
+    font-size: 25px;
+    opacity: .7;
+}
+.item__info > p {
+    font-size: 25px;
+}
+.item__info > span {
+    font-size: 15px;
+    margin-top: 5px;
+}
+.item__info > .part > span {
+    font-size: 15px;
+    margin-top: 5px;
+}
+span > .MuiSvgIcon-root {
+    font-size: 20px;
+    margin-right: 5px;
+}
+.item__info > img {
+    width: 50px;
+}
+.part__row {
+    display: flex;
+    justify-content: space-between;
+}
+.last_graph {
+    display: flex;
+}
+.last_graph > .part__row {
+    border-top: 1px solid rgb(207, 207, 207);
+    margin: 10px 40px 10px 40px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+}
+.last_graph > .part__row > .last__part > p {
+    margin-top: 5px;
+    display: flex;
+    word-break: keep-all;
+    font-size: 20px;
+    color: white;
+    opacity: .7;
+}
+.last_graph > .part__row > .last__part {
+    width: 100%;
+}
+.last_graph > .part__row > .last__part > span {
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+}
+@media screen and (max-width: 1024px) {
+    .current__info {
+        width: 95%;
+        
+    }
+}
+@media screen and (max-width: 768px) {
+    .day__details__container{
+        display: flex;
+        flex-direction: column;
+    }
+    .last_graph {
+        width: 100%;
+    }
+    .last_graph > .part__row > .last__part {
+        width: 50%;
+    }
+    .item__info {
+        padding: 10px 20px;
+    }
+}

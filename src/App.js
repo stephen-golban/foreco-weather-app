@@ -147,6 +147,7 @@ useEffect(() => {
     <div className="app">
       {userTime === "" ? <Loader/> : <Loader/> && <Header/>}
       <CurrentWeather/>
+      <p className="footer">Făcut cu multă pasiune de <a href="https://stefan-golban.netlify.app" target="_blank" rel="noopener noreferrer">Golban Ştefan</a></p>
     </div>
   );
 }

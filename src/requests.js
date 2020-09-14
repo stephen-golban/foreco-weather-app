@@ -16,6 +16,8 @@ const RealTime = [
     'visibility',
     'moon_phase',
     'weather_code',
+    'epa_aqi',
+    'epa_health_concern'
   ]
   const Forecast = [
         'temp',

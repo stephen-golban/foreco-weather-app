@@ -4,8 +4,9 @@ import './CurrentWeather.css';
 import requests from './requests';
 import { useStateValue } from './StateProvider';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import Daily from './Daily';
+import Forecast from './Forecast';
 import Loader from './Loader';
+import CurrentInfo from './CurrentInfo';
 
 function CurrentWeather() {
     const [time, setTime] = useState("");
@@ -75,8 +76,11 @@ function CurrentWeather() {
                     sunrise: request1.data.sunrise.value,
                     sunset: request1.data.sunset.value,
                     moon: request1.data.moon_phase.value,
+                    airQ: request1.data.epa_aqi.value,
+                    quality: request1.data.epa_health_concern.value,
                     weatherCode: request1.data.weather_code.value,
                 }
+                console.log(request1);
                 if(request1 !== null && request2 !== null && request3 !== null) {
                     setWData(WeatherRes);
                     setForeDaily(request2.data.slice(0,5));
@@ -111,7 +115,7 @@ function CurrentWeather() {
         })
     }, [dispatch]);
     const handleScrollToWeatherInfo = () => {
-        let selectedDiv = document.querySelector(".other__info");
+        let selectedDiv = document.querySelector(".current__infoContainer");
         selectedDiv.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
     return (
@@ -148,7 +152,7 @@ function CurrentWeather() {
                          Umiditate: {Math.floor(weatherData.humidity)}% 
                     </div>
                     <div>
-                         Vânt: {Math.floor(weatherData.windSpeed)} km/h {weatherData.windDir}     
+                         Vânt: {Math.floor(weatherData.windSpeed)}     
                     </div>
                     <div>
                         Precipitații: {Math.floor(weatherData.precipitation)} mm
@@ -156,10 +160,8 @@ function CurrentWeather() {
                     <span onClick={handleScrollToWeatherInfo}>Vezi mai mult {<ArrowForwardIosIcon/>}</span>
                 </div>
             </div>
-            <Daily setHourlyDate={setHourlyDate}/>
-            <div className="other__info">
-              
-            </div>
+            <Forecast setHourlyDate={setHourlyDate}/>
+            <CurrentInfo/>
         </div>
         )}
         </>

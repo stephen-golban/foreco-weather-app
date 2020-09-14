@@ -1,5 +1,5 @@
 .currentWeather{
-    padding: 40px;
+    padding: 40px 40px 20px 40px;
     color: white;
     letter-spacing: .8px;
     display: flex;
@@ -10,7 +10,7 @@
     padding-right: 15%;
 }
 .currentWeather > .part > .location__info {
-    font-size: 19px;
+    font-size: 15px;
 }
 .currentWeather > .part > .location__info > div:nth-child(2){
     margin-top: 5px;

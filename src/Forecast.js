@@ -1,38 +1,46 @@
 import React, { useState } from 'react';
-import './Daily.css';
+import './Forecast.css';
 import { useStateValue } from './StateProvider';
 import RemoveIcon from '@material-ui/icons/Remove';
 
 
-function Daily({ setHourlyDate }) {
+function Forecast({ setHourlyDate }) {
   const [{ userTime, forecastDaily, forecastHourly }] = useStateValue();
   const type = userTime >= "06" && userTime <= "19" ? "day" : "night";
   const dayarr = ["06","07","08","09","10","11","12","13","14","15","16","17","18","19"];
   const nightarr = ["20","21","22","23","00","01","02","03","04","05"];
   const [isActive1, setIsActive1] = useState("dodgerblue");
   const [isActive2, setIsActive2] = useState("");
+  const [fadeAnim, setFadeAnim] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
 
   const handleOnClick = (e) => {
     setHourlyDate(e.target.innerHTML);
+    setFadeAnim(true);
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        let selectedDiv = document.querySelector(".hourly__container");
+        selectedDiv.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    }
+    
   }
   const scrollToEnd = () => {
     var elmnt = document.querySelector(".hourly");
-    elmnt.scrollLeft += 2500;
+    elmnt.scrollLeft += 500;
     setIsActive1("");
     setIsActive2("dodgerblue");
   }
   const scrollToStart = () => {
     var elmnt = document.querySelector(".hourly");
-    elmnt.scrollLeft -= 2500;
+    elmnt.scrollLeft -= 500;
     setIsActive1("dodgerblue");
     setIsActive2("");
   }
   return (
       <div className="forecast__container">
             <div className="daily">
-                {forecastDaily.map((day) => (
-                    <div className="day" key={Math.random()} onClick={e => handleOnClick(e)}>
+                {forecastDaily.map((day, i) => (
+                    <div className={`day ${activeIndex === i ? 'day__active' : ''}`} key={i} onClick={e => {handleOnClick(e); setActiveIndex(i)}} >
                     <div className="day__date">
                         { 
                             new Date(day.observation_time.value).toLocaleString("ro-RO", {weekday: "long", day: "numeric"}) 
@@ -120,7 +128,7 @@ function Daily({ setHourlyDate }) {
                 ))}
             </div>
             <div className="hourly__container">
-                <div className="hourly">
+                <div className={`hourly ${fadeAnim ? 'fade' : ''}`} onAnimationEnd={() => setFadeAnim(false)}>
                     {forecastHourly.map((hour, i) => (
                         <div className="hour" key={i}>
                             <div className="icon">
@@ -178,9 +186,11 @@ function Daily({ setHourlyDate }) {
                                 <img src={`assets/weather.svg`} alt="lol"/>  
                             }
                             </div>
+
                             <div className="temp">
                                 {Math.floor(hour.temp.value)}&deg;
                             </div>
+                            
                             <div className="desc">
                                 {
                                     hour.weather_code.value === "clear" ?
@@ -225,4 +235,4 @@ function Daily({ setHourlyDate }) {
   )
 }
 
-export default Daily
+export default Forecast
