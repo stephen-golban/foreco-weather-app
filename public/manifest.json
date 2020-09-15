@@ -1,19 +1,19 @@
 {
   "short_name": "Forecu",
-  "name": "Forecu Weather",
+  "name": "Forecu | Golban Stefan",
   "icons": [
     {
-      "src": "title-icon.png",
+      "src": "logo.png",
       "sizes": "120x120 32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "title-icon.png",
+      "src": "logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "title-icon.png",
+      "src": "logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }

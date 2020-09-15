@@ -90,7 +90,7 @@ span > .MuiSvgIcon-root {
 }
 @media screen and (max-width: 1024px) {
     .current__info {
-        width: 95%;
+        width: 90%;
         
     }
 }
@@ -99,13 +99,15 @@ span > .MuiSvgIcon-root {
         display: flex;
         flex-direction: column;
     }
+    .current__info {
+        padding: 20px 0;
+    }
     .last_graph {
         width: 100%;
+     
     }
     .last_graph > .part__row > .last__part {
-        width: 50%;
+        width: 100%;
     }
-    .item__info {
-        padding: 10px 20px;
-    }
+    
 }
